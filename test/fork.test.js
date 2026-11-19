@@ -8,6 +8,12 @@ const AGENT_ID = "0x60b9262456de011f7d15a54cdd8c48baaa8b022f";
 const USER_WALLET = "0xfBcE2E2D17F7C89CaA567B50Cd5f98570F7fFd5D";
 
 describe("OneVoice on BSC mainnet fork", function () {
+  before(function () {
+    // Skip in a plain `npx hardhat test` run — the fork needs a live
+    // archive/full-state BSC RPC (public RPCs fail with "missing trie node").
+    if (process.env.FORK !== "1") this.skip();
+  });
+
   it("real Agent ID gate passes for the user's wallet, fails for a stranger", async function () {
     const agentId = await ethers.getContractAt(
       ["function balanceOf(address) view returns (uint256)"],
