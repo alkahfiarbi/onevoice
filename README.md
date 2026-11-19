@@ -114,7 +114,7 @@ Materials (fill in the contract address after deploy):
 
 - **Project name:** OneVoice
 - **Website:** https://alkahfiarbi.github.io/onevoice/
-- **Contract address:** _(to be filled after deploy)_
+- **Contract address:** `0xcECEF7C30894da42C0Ea96961083364684A066d3` (BNB Chain mainnet, deployed 2026-11-19 via CreateX factory; deploy tx `0x82af85bd6bdc89c1ff88457d9dfcb208a1b17a10cfd931dbc42d85a6340a516d`, block 134515930; [BscScan](https://bscscan.com/address/0xcECEF7C30894da42C0Ea96961083364684A066d3))
 - **Agent ID usage:** Access control + sybil-resistant identity. Only Agent
   ID holders can create polls and vote (checked on-chain via
   `balanceOf` on the official Agent ID contract); one Agent ID = one vote
