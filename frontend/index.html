@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneVoice — one Agent ID, one vote</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 640px; margin: 0 auto; padding: 16px; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin-bottom: 0; }
+  .sub { color: #888; margin-top: 4px; }
+  .card { border: 1px solid #8884; border-radius: 12px; padding: 14px; margin: 14px 0; }
+  button { background: #f0b90b; color: #111; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 700; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.secondary { background: transparent; border: 1px solid #888; color: inherit; }
+  input, select { width: 100%; box-sizing: border-box; padding: 10px; margin: 6px 0; border: 1px solid #8886; border-radius: 8px; background: inherit; color: inherit; }
+  .opt { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid #8882; }
+  .bar { height: 8px; background: #8883; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .bar > div { height: 100%; background: #f0b90b; }
+  .badge { display: inline-block; background: #1a7f37; color: #fff; border-radius: 20px; padding: 2px 10px; font-size: .85rem; }
+  .badge.no { background: #888; }
+  .meta { font-size: .85rem; color: #888; }
+  #status { white-space: pre-wrap; font-size: .9rem; }
+</style>
+</head>
+<body>
+<h1>🗳️ OneVoice</h1>
+<p class="sub">On-chain polls where one Agent ID (.ai) equals exactly one vote. No owner, no admin, no fees, no custody — the contract only records votes.</p>
+
+<div class="card" id="connect-card">
+  <div id="account">Not connected.</div>
+  <p><button id="connect-btn">Connect wallet</button></p>
+  <p class="meta">Works with Binance Wallet, MetaMask, or any injected wallet on BNB Chain (chain 56). You need an Agent ID to create polls and vote — claim one in the Binance App: Wallet &gt; banner &gt; Agent ID.</p>
+</div>
+
+<div class="card" id="deploy-note" hidden>
+  <strong>Not deployed yet.</strong>
+  <span class="meta">The OneVoice contract has not been deployed to BNB Chain mainnet. Follow the repo for the live address.</span>
+</div>
+
+<div class="card" id="create-card" hidden>
+  <h2>Create a poll</h2>
+  <input id="q" maxlength="200" placeholder="Question (e.g. Should agents tip in BNB or USDC?)">
+  <div id="opts">
+    <input class="opt-in" maxlength="80" placeholder="Option 1">
+    <input class="opt-in" maxlength="80" placeholder="Option 2">
+  </div>
+  <p>
+    <button class="secondary" id="add-opt">+ Add option</button>
+    <select id="dur">
+      <option value="86400">Voting open 1 day</option>
+      <option value="259200" selected>Voting open 3 days</option>
+      <option value="604800">Voting open 7 days</option>
+    </select>
+  </p>
+  <p><button id="create-btn">Create poll</button></p>
+</div>
+
+<h2>Polls</h2>
+<div id="polls"><p class="meta">Loading…</p></div>
+<p id="status"></p>
+<p class="meta">Contract: <span id="contract-addr">—</span> · <a href="https://github.com/alkahfiarbi/onevoice" target="_blank" rel="noopener">Source code (GitHub)</a> · Built for the Binance Agent ID Hackathon. This page never asks for your seed phrase, private key, or pairing code. Every transaction is confirmed by you in your own wallet.</p>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
